@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAL & Co - Portafolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brown-dark: #5D4E37;
+            --brown-mid: #8B7355;
+            --brown-light: #E8DCC8;
+            --green-btn: #7A8C6A;
+            --green-btn-hover: #5E6E52;
+
+            /* Paleta home: melocotón suave */
+            --home-bg: #FAF0E8;
+            --home-wave: #F5E4D8;
+
+            /* Sofía: lavanda */
+            --sofia-accent: #A8B5E8;
+            --sofia-bg-left: #E8EAF6;
+            --sofia-bg-right: #C5CAE9;
+            --sofia-card-bg: #D0D8F0;
+            --sofia-trabajo: #DCE8DC;
+
+            /* Ana: rosa */
+            --ana-accent: #F48FB1;
+            --ana-bg-left: #FCE4EC;
+            --ana-bg-right: #F8BBD9;
+            --ana-card-bg: #F3C8DF;
+            --ana-trabajo: #DCE8DC;
+
+            /* Luis: menta */
+            --luis-accent: #80CBC4;
+            --luis-bg-left: #E0F2F1;
+            --luis-bg-right: #B2DFDB;
+            --luis-card-bg: #A5D6D3;
+            --luis-trabajo: #DCE8DC;
+
+            /* Registro: amarillo pastel */
+            --register-bg: #FEFCE8;
+            --register-wave: #FFF9C4;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--home-bg);
+        }
+
+        /* ── HEADER ── */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 60px;
+            background: white;
+            box-shadow: 0 2px 12px rgba(93,78,55,0.07);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--brown-dark);
+            letter-spacing: -0.5px;
+            transition: opacity 0.2s;
+            cursor: pointer;
+        }
+        .logo:hover { opacity: 0.75; }
+
+        nav { display: flex; gap: 36px; align-items: center; }
+
+        nav a {
+            text-decoration: none;
+            color: var(--brown-mid);
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            padding-bottom: 3px;
+            transition: color 0.25s;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: var(--brown-dark);
+            border-radius: 2px;
+            transition: width 0.25s ease;
+        }
+        nav a:hover { color: var(--brown-dark); }
+        nav a:hover::after { width: 100%; }
+
+        .btn-registro {
+            background: var(--brown-dark);
+            color: white;
+            padding: 11px 30px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 700;
+            font-family: 'Nunito', sans-serif;
+            transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(93,78,55,0.25);
+        }
+        .btn-registro:hover {
+            background: #3D3022;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(93,78,55,0.35);
+        }
+        .btn-registro:active { transform: translateY(0); }
+
+        /* ── PAGES ── */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* ── HOME ── */
+        .home-hero {
+            text-align: center;
+            padding: 40px 20px 0px;
+            background: var(--home-bg);
+            position: relative;
+            overflow: hidden;
+        }
+        /* Ondas decorativas del prototipo */
+        .home-hero::before {
+            content: '';
+            position: absolute;
+            top: -80px; left: -10%;
+            width: 120%; height: 300px;
+            background: var(--home-wave);
+            border-radius: 0 0 60% 60%;
+            z-index: 0;
+        }
+        .home-hero > * { position: relative; z-index: 1; }
+
+        .home-hero h1 {
+            font-size: 54px;
+            font-weight: 700;
+            color: var(--brown-dark);
+            margin-bottom: 18px;
+        }
+        .home-hero h1 span { font-weight: 800; }
+
+        .home-hero p {
+            font-size: 17px;
+            color: var(--brown-mid);
+            max-width: 780px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 80px;
+        }
+
+        .search-input {
+            width: 560px;
+            padding: 16px 24px;
+            border-radius: 14px;
+            border: none;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 16px;
+            font-family: 'Nunito', sans-serif;
+            transition: box-shadow 0.25s;
+        }
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 4px 24px rgba(93,78,55,0.18);
+        }
+        select.search-input {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238B7355' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            padding-right: 48px;
+            cursor: pointer;
+            color: #5D4E37;
+        }
+        select.search-input option[disabled] { color: #aaa; }
+
+        .btn-buscar {
+            padding: 16px 44px;
+            background: var(--green-btn);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Nunito', sans-serif;
+            cursor: pointer;
+            transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(122,140,106,0.3);
+        }
+        .btn-buscar:hover {
+            background: var(--green-btn-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(122,140,106,0.4);
+        }
+        .btn-buscar:active { transform: translateY(0); }
+
+        .equipo-section { text-align: center; padding: 0 60px 30px; }
+        .equipo-section h2 {
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--brown-mid);
+            margin-bottom: 30px;
+        }
+
+        .equipo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 36px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .equipo-card {
+            background: white;
+            border-radius: 24px;
+            padding: 36px 28px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-align: left;
+        }
+        .equipo-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 14px 36px rgba(0,0,0,0.13);
+        }
+
+        .avatar-circle {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+        .equipo-card:hover .avatar-circle { transform: scale(1.08); }
+
+        /* Colores exactos del prototipo */
+        .avatar-sofia { background: #A8B5E8; }
+        .avatar-sofia {
+            background-image: url('Sofia/Sofia_profile.jpeg');
+            background-size: cover;
+            background-position: top;
+        }
+        .avatar-ana   { background: #F48FB1; }
+        .avatar-ana   {
+            background-image: url('Ana/Ana_Profile.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        .avatar-luis  { background: #80CBC4; }
+        .avatar-luis  {
+            background-image: url('Luis/Luis_profile.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .equipo-card h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--brown-dark);
+            margin-bottom: 10px;
+        }
+
+        .badge-engineer {
+            display: inline-block;
+            background: var(--brown-light);
+            color: var(--brown-mid);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: background 0.25s;
+        }
+        .equipo-card:hover .badge-engineer { background: #D4C4A8; }
+
+        /* ── PROFILE PAGES ── */
+        .profile-page {
+            min-height: calc(100vh - 65px);
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+        }
+
+        /* Fondo izquierdo: verde menta suave (igual en los 3) */
+        .profile-left {
+            background: linear-gradient(160deg, #E8F5EF 0%, #D4EDE3 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Onda decorativa */
+        .profile-left::after {
+            content: '';
+            position: absolute;
+            bottom: -60px; right: -80px;
+            width: 250px; height: 250px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+            pointer-events: none;
+        }
+
+        /* Fondo derecho según perfil */
+        .profile-right-sofia { background: var(--sofia-bg-right); }
+        .profile-right-ana   { background: var(--ana-bg-right); }
+        .profile-right-luis  { background: var(--luis-bg-right); }
+
+        .profile-photo {
+            width: 240px;
+            height: 240px;
+            border-radius: 36px;
+            margin-bottom: 28px;
+            transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        .profile-photo:hover {
+            transform: scale(1.05) rotate(-1deg);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+        }
+
+        .profile-photo-sofia { 
+            background-image: url('Sofia/Sofia_profile.jpeg');
+            background-size: cover;
+            background-position: top;
+         }
+        .profile-photo-ana   {
+            background-image: url('Ana/Ana_Profile.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        .profile-photo-luis  { 
+            background-image: url('Luis/Luis_profile.jpeg');
+            background-size: cover;
+            background-position: center;
+         }
+
+        .profile-left h2 {
+            font-size: 44px;
+            font-weight: 700;
+            color: var(--brown-dark);
+            margin-bottom: 12px;
+        }
+        .profile-left > p {
+            font-size: 19px;
+            color: #6D5D47;
+            margin-bottom: 36px;
+        }
+
+        .contact-pill {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            border-radius: 28px;
+            padding: 18px 34px;
+            font-size: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .contact-pill:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        .contact-pill-sofia { background: rgba(168,181,232,0.35); }
+        .contact-pill-ana   { background: rgba(244,143,177,0.25); }
+        .contact-pill-luis  { background: rgba(128,203,196,0.35); }
+
+        .contact-section { padding-right: 18px; border-right: 2px solid rgba(93,78,55,0.25); }
+        .ocupacion-section { padding-left: 18px; }
+        .contact-label { font-weight: 700; color: var(--brown-dark); display: block; margin-bottom: 4px; }
+        .contact-value { color: #6D5D47; }
+
+        /* Lado derecho del perfil */
+        .profile-right {
+            padding: 50px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .profile-right h3 {
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--brown-dark);
+            margin-bottom: 36px;
+            text-align: center;
+        }
+
+        .trabajos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .trabajo-card {
+            aspect-ratio: 1;
+            border-radius: 22px;
+            background: rgba(220,232,220,0.7);
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s, filter 0.3s;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+        }
+        .trabajo-card:hover {
+            transform: scale(1.07) translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+            filter: brightness(1.04);
+        }
+
+        .ver-mas {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--brown-dark);
+            text-decoration: underline;
+            cursor: pointer;
+            transition: color 0.2s, letter-spacing 0.2s;
+        }
+        .ver-mas:hover { color: var(--brown-mid); letter-spacing: 0.5px; }
+
+        /* ── PORTFOLIOS PAGE ── */
+        .portfolios-page {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            min-height: calc(100vh - 65px);
+        }
+
+        .sidebar {
+            background: white;
+            padding: 40px 16px;
+            box-shadow: 2px 0 12px rgba(0,0,0,0.05);
+        }
+        .sidebar h3 {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--brown-dark);
+            margin-bottom: 22px;
+            padding-left: 14px;
+        }
+
+        .category-item {
+            padding: 13px 18px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            color: var(--brown-mid);
+            font-size: 15px;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s, transform 0.2s, padding-left 0.2s;
+        }
+        .category-item:hover {
+            background: #F0E8DC;
+            color: var(--brown-dark);
+            padding-left: 24px;
+        }
+        .category-item.active {
+            background: var(--green-btn);
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(122,140,106,0.3);
+        }
+        .category-item.active:hover { padding-left: 18px; }
+
+        .portfolios-content { padding: 60px; background: var(--home-bg); }
+        .category-section { display: none; }
+        .category-section.active { display: block; }
+        .category-section h2 {
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--brown-dark);
+            margin-bottom: 36px;
+        }
+
+        .proyectos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .proyecto-card {
+            position: relative;
+            aspect-ratio: 1.2;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s;
+            background: #D8D8D8;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+        .proyecto-card:hover {
+            transform: scale(1.04) translateY(-4px);
+            box-shadow: 0 14px 32px rgba(0,0,0,0.15);
+        }
+        .proyecto-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(93,78,55,0);
+            transition: background 0.3s;
+        }
+        .proyecto-card:hover::after { background: rgba(93,78,55,0.05); }
+
+        .owner-tag {
+            position: absolute;
+            top: 14px; right: 14px;
+            background: rgba(255,255,255,0.95);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--brown-dark);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+            z-index: 1;
+            transition: background 0.2s;
+        }
+        .proyecto-card:hover .owner-tag { background: white; }
+
+        /* ── SOBRE NOSOTROS ── */
+        .sobre-page {
+            padding: 80px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .sobre-intro { text-align: center; margin-bottom: 70px; }
+        .sobre-intro h1 { font-size: 46px; font-weight: 800; color: var(--brown-dark); margin-bottom: 24px; }
+        .sobre-intro p { font-size: 17px; color: var(--brown-mid); max-width: 860px; margin: 0 auto; line-height: 1.8; }
+
+        .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; }
+
+        .team-member {
+            background: white;
+            padding: 40px 28px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s;
+        }
+        .team-member:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+        }
+        .team-avatar {
+            width: 130px; height: 130px; border-radius: 50%;
+            margin: 0 auto 22px;
+            transition: transform 0.35s;
+        }
+        .team-member:hover .team-avatar { transform: scale(1.07) rotate(3deg); }
+        .team-member h3 { font-size: 26px; font-weight: 700; color: var(--brown-dark); margin-bottom: 12px; }
+        .team-member p { font-size: 15px; color: var(--brown-mid); line-height: 1.6; margin-bottom: 18px; }
+        .team-contact { font-size: 14px; color: var(--green-btn); font-weight: 700; }
+
+        /* ── LOGIN ── */
+        .login-page {
+            min-height: calc(100vh - 65px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            background: var(--home-bg);
+        }
+        .login-card {
+            background: white;
+            padding: 56px 72px;
+            border-radius: 28px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.09);
+            width: 100%;
+            max-width: 480px;
+        }
+        .login-card h2 { font-size: 36px; font-weight: 800; color: var(--brown-dark); margin-bottom: 36px; text-align: center; }
+
+        .form-group { margin-bottom: 22px; }
+        .form-group label { display: block; font-size: 15px; font-weight: 700; color: var(--brown-dark); margin-bottom: 8px; }
+        .form-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 2px solid var(--brown-light);
+            font-size: 15px;
+            font-family: 'Nunito', sans-serif;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--green-btn);
+            box-shadow: 0 0 0 3px rgba(122,140,106,0.15);
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: var(--green-btn);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            font-family: 'Nunito', sans-serif;
+            cursor: pointer;
+            margin-top: 18px;
+            transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 14px rgba(122,140,106,0.3);
+        }
+        .btn-submit:hover {
+            background: var(--green-btn-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(122,140,106,0.38);
+        }
+        .btn-submit:active { transform: translateY(0); }
+
+        /* ── REGISTER ── */
+        .register-page {
+            min-height: calc(100vh - 65px);
+            background: linear-gradient(140deg, #FEFCE8 0%, #FFFDE7 50%, #FFF9C4 100%);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 56px;
+            padding: 72px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        .register-page::before {
+            content: '';
+            position: absolute;
+            top: -120px; left: -120px;
+            width: 420px; height: 420px;
+            background: rgba(255,238,88,0.18);
+            border-radius: 50%;
+        }
+        .register-page::after {
+            content: '';
+            position: absolute;
+            bottom: -160px; right: -160px;
+            width: 520px; height: 520px;
+            background: rgba(255,238,88,0.12);
+            border-radius: 50%;
+        }
+
+        .register-form {
+            background: white;
+            padding: 56px;
+            border-radius: 28px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+            z-index: 1;
+        }
+        .register-form h2 { font-size: 38px; font-weight: 800; color: var(--brown-dark); margin-bottom: 36px; }
+
+        .benefits-section {
+            border: 2.5px solid #D4AF37;
+            border-radius: 28px;
+            padding: 56px;
+            background: rgba(255,255,255,0.55);
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            transition: box-shadow 0.3s;
+        }
+        .benefits-section:hover { box-shadow: 0 8px 30px rgba(212,175,55,0.2); }
+        .benefits-section h3 { font-size: 30px; font-weight: 800; color: var(--brown-dark); margin-bottom: 28px; }
+        .benefits-section ul { list-style: none; }
+        .benefits-section li {
+            font-size: 16px;
+            color: var(--brown-mid);
+            margin-bottom: 18px;
+            padding-left: 28px;
+            position: relative;
+            line-height: 1.6;
+        }
+        .benefits-section li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #D4AF37;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        /* ── BACK ARROW ── */
+        .profile-wrapper {
+            position: relative;
+        }
+        .back-arrow {
+            position: absolute;
+            top: 22px;
+            left: 22px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(6px);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brown-dark);
+            z-index: 10;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 10px rgba(93,78,55,0.13);
+        }
+        .back-arrow:hover {
+            background: rgba(255,255,255,0.85);
+            transform: translateX(-3px);
+            box-shadow: 0 4px 16px rgba(93,78,55,0.20);
+        }
+
+        /* ── FLOATING ASSISTANT ── */
+        .floating-assistant {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 6px 24px rgba(93,78,55,0.22);
+            border: none;
+            cursor: pointer;
+            font-size: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), box-shadow 0.25s;
+        }
+        .floating-assistant:hover {
+            transform: scale(1.12) translateY(-3px);
+            box-shadow: 0 12px 32px rgba(93,78,55,0.30);
+        }
+        .floating-assistant:active { transform: scale(0.97); }
+
+        /* Tooltip del asistente */
+        .floating-assistant::before {
+            content: 'Asistente virtual';
+            position: absolute;
+            right: 72px;
+            white-space: nowrap;
+            background: var(--brown-dark);
+            color: white;
+            font-family: 'Nunito', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        .floating-assistant:hover::before { opacity: 1; }
+
+        /* ── COMING SOON PAGE ── */
+        .comingsoon-page {
+            min-height: calc(100vh - 65px);
+            background: var(--home-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .comingsoon-page::before {
+            content: '';
+            position: absolute;
+            top: -80px; left: -10%;
+            width: 120%; height: 300px;
+            background: var(--home-wave);
+            border-radius: 0 0 60% 60%;
+            z-index: 0;
+        }
+        .comingsoon-page::after {
+            content: '';
+            position: absolute;
+            bottom: -100px; right: -100px;
+            width: 380px; height: 380px;
+            background: rgba(232,220,200,0.35);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        .comingsoon-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 560px;
+        }
+        .comingsoon-emoji {
+            font-size: 80px;
+            margin-bottom: 24px;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        .comingsoon-badge {
+            display: inline-block;
+            background: var(--brown-light);
+            color: var(--brown-mid);
+            padding: 6px 22px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 28px;
+        }
+        .comingsoon-inner h1 {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--brown-dark);
+            margin-bottom: 20px;
+            line-height: 1.15;
+        }
+        .comingsoon-inner p {
+            font-size: 17px;
+            color: var(--brown-mid);
+            line-height: 1.75;
+            margin-bottom: 40px;
+        }
+        .comingsoon-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        .comingsoon-dots span {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--brown-light);
+            animation: pulse-dot 1.4s ease-in-out infinite;
+        }
+        .comingsoon-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .comingsoon-dots span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); background: var(--brown-light); }
+            50% { transform: scale(1.5); background: var(--brown-mid); }
+        }
+        .comingsoon-btn {
+            padding: 14px 40px;
+            background: var(--brown-dark);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Nunito', sans-serif;
+            cursor: pointer;
+            transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 14px rgba(93,78,55,0.28);
+        }
+        .comingsoon-btn:hover {
+            background: #3D3022;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(93,78,55,0.35);
+        }
+        .comingsoon-btn:active { transform: translateY(0); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .equipo-grid, .team-grid, .trabajos-grid, .proyectos-grid { grid-template-columns: repeat(2, 1fr); }
+            .profile-page, .register-page { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            header { padding: 14px 20px; }
+            nav { gap: 14px; }
+            .home-hero h1 { font-size: 34px; }
+            .search-input { width: 100%; }
+            .equipo-grid, .team-grid, .trabajos-grid, .proyectos-grid { grid-template-columns: 1fr; }
+            .portfolios-page { grid-template-columns: 1fr; }
+            .sidebar { padding: 20px; }
+            .equipo-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo" onclick="showPage('home')">SAL & Co</div>
+        <nav>
+            <a onclick="showPage('home')">Inicio</a>
+            <a onclick="showPage('portfolios')">Portafolios</a>
+            <a onclick="showPage('sobre')">Sobre Nosotros</a>
+            <a onclick="showPage('login')">Iniciar Sesión</a>
+            <button class="btn-registro" onclick="showPage('register')">Registro</button>
+        </nav>
+    </header>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <div class="home-hero">
+            <h1>¡Encuentra <span>tu</span> Portafolio ideal!</h1>
+            <p>Aquí encontrarás la evolución de nuestras ideas plasmadas en diferentes formatos digitales. Diseñamos, modelamos y creamos porque nos apasiona dar forma al futuro visual.</p>
+            <div class="search-container">
+                <select class="search-input" id="searchInput">
+                    <option value="" disabled selected>Selecciona una categoría...</option>
+                    <option value="modelado3d">Modelado 3D</option>
+                    <option value="animacion2d">Animación 2D</option>
+                    <option value="animacion3d">Animación 3D</option>
+                    <option value="disenoweb">Diseño Web</option>
+                    <option value="tallerdigital">Taller Digital</option>
+                    <option value="diseno">Diseño</option>
+                </select>
+                <button class="btn-buscar" onclick="buscarProyectos()">Buscar</button>
+            </div>
+        </div>
+        <div class="equipo-section">
+            <h2>Nuestro equipo</h2>
+            <div class="equipo-grid">
+                <div class="equipo-card" onclick="showPage('sofia')">
+                    <div class="avatar-circle avatar-sofia"></div>
+                    <h3>Sofía</h3>
+                    <span class="badge-engineer">Engineer</span>
+                </div>
+                <div class="equipo-card" onclick="showPage('ana')">
+                    <div class="avatar-circle avatar-ana"></div>
+                    <h3>Ana</h3>
+                    <span class="badge-engineer">Engineer</span>
+                </div>
+                <div class="equipo-card" onclick="showPage('luis')">
+                    <div class="avatar-circle avatar-luis"></div>
+                    <h3>Luis</h3>
+                    <span class="badge-engineer">Engineer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SOFIA PROFILE PAGE -->
+    <div id="sofia" class="page">
+        <div class="profile-wrapper">
+        <button class="back-arrow" onclick="showPage('home')" title="Volver al inicio">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="profile-page">
+            <div class="profile-left">
+                <div class="profile-photo profile-photo-sofia"></div>
+                <h2>Sofía</h2>
+                <p>
+                    Hola, soy Sofía.
+                    Mi especialidad son las experiencias visuales innovadoras.
+                </p>
+                <div class="contact-pill contact-pill-sofia">
+                    <div class="contact-section">
+                        <span class="contact-label">Contacto</span>
+                        <span class="contact-value">SofiaC@gmail.com</span>
+                    </div>
+                    <div class="ocupacion-section">
+                        <span class="contact-label">Ocupación</span>
+                        <span class="contact-value">Diseñadora, Ingeniera</span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-right profile-right-sofia">
+                <h3>Trabajos destacados</h3>
+                <div class="trabajos-grid">
+                    <div class="trabajo-card" 
+                        style="background-image: url('Sofia/Diseno_Sofia.jpeg'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Sofia/Diseno_Sofia.jpeg', 'imagen')"></div>
+                    <div class="trabajo-card" 
+                        style="background-image: url('Sofia/DisenoWeb_Sofia.jpeg'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Sofia/DisenoWeb_Sofia.jpeg', 'imagen')"></div>
+                    <div class="trabajo-card" 
+                        style="background-image: url('Sofia/Modelado_Sofia.jpeg'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Sofia/Modelado_Sofia.jpeg', 'imagen')"></div>
+                    <div class="trabajo-card" 
+                        style="background-image: url('Sofia/Taller_Sofia.jpeg'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Sofia/Taller_Sofia.jpeg', 'imagen')"></div>
+                    <div class="trabajo-card" 
+                        style="background-image: url('Sofia/Animacion2d_min.png'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Sofia/Animacion2d.mp4', 'video')"></div>
+                    <div class="trabajo-card" 
+                        style="background-image: url('Sofia/Animacion2d2_min.png'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Sofia/Animacion2d2.mp4', 'video')"></div>
+                </div>
+                <div class="ver-mas" onclick="showPage('portfolios')">Ver más</div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- ANA PROFILE PAGE -->
+    <div id="ana" class="page">
+        <div class="profile-wrapper">
+        <button class="back-arrow" onclick="showPage('home')" title="Volver al inicio">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="profile-page">
+            <div class="profile-left">
+                <div class="profile-photo profile-photo-ana"></div>
+                <h2>Ana</h2>
+                <p>
+                    Hola, soy Ana.
+                    Mi pasión es el diseño y las interacciones 3D.
+                </p>
+                <div class="contact-pill contact-pill-ana">
+                    <div class="contact-section">
+                        <span class="contact-label">Contacto</span>
+                        <span class="contact-value">AnaMa@gmail.com</span>
+                    </div>
+                    <div class="ocupacion-section">
+                        <span class="contact-label">Ocupación</span>
+                        <span class="contact-value">Diseñadora, Ingeniera</span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-right profile-right-ana">
+                <h3>Trabajos destacados</h3>
+                <div class="trabajos-grid">
+                    <!-- EDITAR: Cambia 'URL_AQUI' por el link de tu proyecto/video -->
+                    <div class="trabajo-card" 
+                        style="background-image: url('Ana/MovieFinal_img.png'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Ana/MovieFinal_002.mp4', 'video')"></div>
+                    <div class="trabajo-card" 
+                        style="background-image: url('Ana/Entrega_grupomusical.png'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Ana/Entrega_grupomusical.png', 'imagen')"></div>
+                    <div class="trabajo-card" 
+                        style="background-image: url('Ana/Ilustracion_Fotoannie.png'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Ana/Ilustracion_Fotoannie.png', 'imagen')"></div>
+                    <div class="trabajo-card" 
+                        style="background-image: url('Ana/image_frente.jpg'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Ana/image_frente.jpg', 'imagen')"></div>
+                    <div class="trabajo-card" 
+                        style="background-image: url('Ana/logo_prisma.jpg'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Ana/logo_prisma.jpg', 'imagen')"></div>
+                    <div class="trabajo-card" 
+                        style="background-image: url('Ana/SEANNIE.png'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Ana/SEANNIE.png', 'imagen')"></div>
+                </div>
+                <div class="ver-mas" onclick="showPage('portfolios')">Ver más</div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- LUIS PROFILE PAGE -->
+    <div id="luis" class="page">
+        <div class="profile-wrapper">
+        <button class="back-arrow" onclick="showPage('home')" title="Volver al inicio">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="profile-page">
+            <div class="profile-left">
+                <div class="profile-photo profile-photo-luis"></div>
+                <h2>Luis</h2>
+                <p>
+                    Hola, soy Luis.
+                    Me gusta el diseño, la creación de personajes y entornos 3D.
+                </p>
+                <div class="contact-pill contact-pill-luis">
+                    <div class="contact-section">
+                        <span class="contact-label">Contacto</span>
+                        <span class="contact-value">Luismicn@gmail.com</span>
+                    </div>
+                    <div class="ocupacion-section">
+                        <span class="contact-label">Ocupación</span>
+                        <span class="contact-value">Diseñador, Ingeniero</span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-right profile-right-luis">
+                <h3>Trabajos destacados</h3>
+                <div class="trabajos-grid">
+                    <div class="trabajo-card"  
+                        style="background-image: url('Luis/Luis_taller.png'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Luis/Luis_taller.png', 'imagen')"></div>
+                    <div class="trabajo-card" 
+                        style="background-image: url('Luis/Luis_taller2.png'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Luis/Luis_taller2.png', 'imagen')"></div>
+                    <div class="trabajo-card" 
+                        style="background-image: url('Luis/Anima4.png'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Luis/A4.mp4', 'video')"></div>
+                    <div class="trabajo-card" 
+                        style="background-image: url('Luis/Lays.png'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Luis/PRODUCT SHOT LAYS.mp4', 'video')"></div>
+                        <div class="trabajo-card" onclick="window.open('Luis/Gatos_page.html', '_blank')">
+                            <div class="trabajo-card" style="background-image: url('https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover; background-position: center; cursor: pointer;">
+                        </div>
+                        </div>
+                    <div class="trabajo-card" 
+                        style="background-image: url('Luis/Anima2.png'); background-size: cover; background-position: center;"
+                        onclick="openLightbox('Luis/A2.mp4', 'video')"></div>
+                </div>
+                <div class="ver-mas" onclick="showPage('portfolios')">Ver más</div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- PORTFOLIOS PAGE -->
+    <div id="portfolios" class="page">
+        <div class="portfolios-page">
+            <div class="sidebar">
+                <h3>Categorías</h3>
+                <div class="category-item active" onclick="showCategory('modelado3d')">Modelado 3D</div>
+                <div class="category-item" onclick="showCategory('animacion2d')">Animación 2D</div>
+                <div class="category-item" onclick="showCategory('animacion3d')">Animación 3D</div>
+                <div class="category-item" onclick="showCategory('disenoweb')">Diseño Web</div>
+                <div class="category-item" onclick="showCategory('tallerdigital')">Taller Digital</div>
+                <div class="category-item" onclick="showCategory('diseno')">Diseño</div>
+            </div>
+            <div class="portfolios-content">
+                <!-- Modelado 3D -->
+                <div id="modelado3d" class="category-section active">
+                    <h2>Modelado 3D</h2>
+                    <div class="proyectos-grid">
+                        <div class="proyecto-card"
+                            style="background-image: url('Sofia/Modelado_Sofia.jpeg'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Sofia/Modelado_Sofia.jpeg', 'imagen')">
+                            <div class="owner-tag">Sofía</div>
+                        </div>
+                        <div class="proyecto-card"
+                            style="background-image: url('Ana/Ana_Modelado.jpeg'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Ana/Ana_Modelado.jpeg', 'imagen')">
+                            <div class="owner-tag">Ana</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Luis/Modelo3d.jpeg'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Luis/Modelo3d.jpeg', 'imagen')">
+                            <div class="owner-tag">Luis</div>
+                        </div>
+                        <div class="proyecto-card"
+                            style="background-image: url('Sofia/Marcianito.jpeg'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Sofia/Marcianito.jpeg', 'imagen')">
+                            <div class="owner-tag">Sofía</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Ana/image_frente.jpg'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Ana/image_frente.jpg', 'imagen')">
+                            <div class="owner-tag">Ana</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Luis/ROOM_.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Luis/ROOM_.png', 'imagen')">
+                            <div class="owner-tag">Luis</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Animación 2D -->
+                <div id="animacion2d" class="category-section">
+                    <h2>Animación 2D</h2>
+                    <div class="proyectos-grid">
+                        <div class="proyecto-card"
+                            style="background-image: url('Ana/anima.1.gif'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Ana/anima.1.gif')">
+                            <div class="owner-tag">Ana</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Sofia/Animacion2d_min.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Sofia/Animacion2d.mp4', 'video')">
+                            <div class="owner-tag">Sofía</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Luis/Anima1_min.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Luis/A3.mp4', 'video')">
+                            <div class="owner-tag">Luis</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Luis/Anima4_min.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Luis/SECUENCIA TERMINADA.mp4', 'video')">
+                            <div class="owner-tag">Luis</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Sofia/Animacion2d2_min.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Sofia/Animacion2d2.mp4', 'video')">
+                            <div class="owner-tag">Sofía</div>
+                        </div>
+                        <div class="proyecto-card"
+                            style="background-image: url('Luis/Anima3_min.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Luis/A1.mp4', 'video')">
+                            <div class="owner-tag">Luis</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Animación 3D -->
+                <div id="animacion3d" class="category-section">
+                    <h2>Animación 3D</h2>
+                    <div class="proyectos-grid">
+                        <div class="proyecto-card" 
+                            style="background-image: url('Luis/Lays.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Luis/PRODUCT SHOT LAYS.mp4', 'video')">
+                            <div class="owner-tag">Luis</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Ana/MovieFinal_img.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Ana/MovieFinal_002.mp4', 'video')">
+                            <div class="owner-tag">Ana</div>
+                        </div>
+                        <div class="proyecto-card" style="background-image: url('Sofia/product.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Sofia/product.mp4', 'video')">
+                            <div class="owner-tag">Sofía</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Luis/Scorpion.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Luis/Scorpion_animation.mp4', 'video')">
+                            <div class="owner-tag">Luis</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Ana/Scorp3_min.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Ana/Scorp3.mp4', 'video')">
+                            <div class="owner-tag">Ana</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Sofia/escorpion.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Sofia/Escorpion.mp4', 'video')">
+                            <div class="owner-tag">Sofía</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diseño Web -->
+                <div id="disenoweb" class="category-section">
+                    <h2>Diseño Web</h2>
+                    <div class="proyectos-grid">
+                        <div class="proyecto-card"
+                            style="background-image: url('Sofia/DisenoWeb_Sofia.jpeg'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Sofia/DisenoWeb_Sofia.jpeg', 'imagen')">
+                            <div class="owner-tag">Sofía</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Luis/Disenoweb2.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Luis/Disenoweb2.png', 'imagen')">
+                            <div class="owner-tag">Luis</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Ana/DisenoWEB.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Ana/DisenoWEB.png', 'imagen')">
+                            <div class="owner-tag">Ana</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Sofia/ruta.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Sofia/ruta.png', 'imagen')">
+                            <div class="owner-tag">Sofía</div>
+                        </div>
+
+                        <div class="proyecto-card" onclick="window.open('Luis/Gatos_page.html', '_blank')">
+                            <div class="trabajo-card" style="background-image: url('https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover; background-position: center; cursor: pointer;"></div>
+                            <div class="owner-tag">Luis</div>
+                        </div>
+
+
+                        <div class="proyecto-card"
+                            style="background-image: url('Ana/DisenoWEB2.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Ana/DisenoWEB2.png', 'imagen')">
+                            <div class="owner-tag">Ana</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Taller Digital -->
+                <div id="tallerdigital" class="category-section">
+                    <h2>Taller Digital</h2>
+                    <div class="proyectos-grid">
+                        <div class="proyecto-card"
+                            style="background-image: url('Ana/practica_001_Render.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Ana/practica_001_Render.png', 'imagen')">
+                            <div class="owner-tag">Ana</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Luis/Luis_taller.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Luis/Luis_taller.png', 'imagen')">
+                            <div class="owner-tag">Luis</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Sofia/Taller_Sofia.jpeg'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Sofia/Taller_Sofia.jpeg', 'imagen')">
+                            <div class="owner-tag">Sofía</div>
+                        </div>
+                        <div class="proyecto-card"
+                            style="background-image: url('Ana/Ilustracion_Fotoannie.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Ana/Ilustracion_Fotoannie.png', 'imagen')">
+                            <div class="owner-tag">Ana</div>
+                        </div>
+                        <div class="proyecto-card"
+                            style="background-image: url('Luis/Luis_taller2.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Luis/Luis_taller2.png', 'imagen')">
+                            <div class="owner-tag">Luis</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Sofia/caballito.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Sofia/caballito.png', 'imagen')">
+                            <div class="owner-tag">Sofía</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diseño -->
+                <div id="diseno" class="category-section">
+                    <h2>Diseño</h2>
+                    <div class="proyectos-grid">
+                        <div class="proyecto-card"
+                            style="background-image: url('Luis/Folleto1.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Luis/Folleto1.png', 'imagen')">
+                            <div class="owner-tag">Luis</div>
+                        </div>
+
+                        <div class="proyecto-card" 
+                            style="background-image: url('Sofia/Diseno_Sofia.jpeg'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Sofia/Diseno_Sofia.jpeg', 'imagen')">
+                            <div class="owner-tag">Sofía</div>
+                        </div>
+                        <div class="proyecto-card"
+                            style="background-image: url('Ana/natura.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Ana/natura.png', 'imagen')">
+                            <div class="owner-tag">Ana</div>
+                        </div>
+                        <div class="proyecto-card"
+                            style="background-image: url('Luis/Folleto2.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Luis/Folleto2.png', 'imagen')">
+                            <div class="owner-tag">Luis</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Sofia/Folleto.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Sofia/Folleto.png', 'imagen')">
+                            <div class="owner-tag">Sofía</div>
+                        </div>
+                        <div class="proyecto-card" 
+                            style="background-image: url('Ana/SEANNIE.png'); background-size: cover; background-position: center;"
+                            onclick="openLightbox('Ana/SEANNIE.png', 'imagen')">
+                            <div class="owner-tag">Ana</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SOBRE NOSOTROS PAGE -->
+    <div id="sobre" class="page">
+        <div class="sobre-page">
+            <div class="sobre-intro">
+                <h1>Sobre Nosotros</h1>
+                <p>Somos un equipo de diseñadores e ingenieros apasionados por crear experiencias visuales únicas. Combinamos creatividad y tecnología para transformar ideas en realidad digital. Cada uno de nosotros aporta su experiencia y visión única para crear trabajos excepcionales.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-avatar avatar-sofia"></div>
+                    <h3>Sofía</h3>
+                    <p>Diseñadora e ingeniera especializada en experiencias visuales innovadoras. Me apasiona crear soluciones creativas que impacten positivamente en las personas.</p>
+                    <div class="team-contact">SofiaC@gmail.com</div>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar avatar-ana"></div>
+                    <h3>Ana</h3>
+                    <p>Diseñadora e ingeniera con enfoque en animación y modelado. Experta en dar vida a ideas a través de diseño digital y animaciones creativas.</p>
+                    <div class="team-contact">AnaMa@gmail.com</div>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar avatar-luis"></div>
+                    <h3>Luis</h3>
+                    <p>Diseñador e ingeniero especializado en modelado 3D, animación y experiencias interactivas. Trabajo en la creación de elementos tridimensionales y en el desarrollo de la lógica visual y técnica para que respondan correctamente al usuario.</p>
+                    <div class="team-contact">Luis@gmail.com</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGIN PAGE -->
+    <div id="login" class="page">
+        <div class="login-page">
+            <div class="login-card">
+                <h2>Iniciar Sesión</h2>
+                <form onsubmit="event.preventDefault(); alert('Funcionalidad de login pendiente');">
+                    <div class="form-group">
+                        <label>Correo Electrónico</label>
+                        <input type="email" required placeholder="tu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input type="password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn-submit">Iniciar Sesión</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGISTER PAGE -->
+    <div id="register" class="page">
+        <div class="register-page">
+            <div class="register-form">
+                <h2>Registro</h2>
+                <form onsubmit="event.preventDefault(); alert('Registro exitoso!');">
+                    <div class="form-group">
+                        <label>Nombre Completo</label>
+                        <input type="text" required placeholder="Tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label>Correo Electrónico</label>
+                        <input type="email" required placeholder="tu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input type="password" required placeholder="••••••••">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirmar Contraseña</label>
+                        <input type="password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn-submit">Crear Cuenta</button>
+                </form>
+            </div>
+            <div class="benefits-section">
+                <h3>Beneficios de Registrarte</h3>
+                <ul>
+                    <li>Acceso completo a todos los portafolios y proyectos de nuestro equipo</li>
+                    <li>Descarga de recursos y plantillas exclusivas</li>
+                    <li>Notificaciones sobre nuevos proyectos y actualizaciones</li>
+                    <li>Posibilidad de contactar directamente con los diseñadores</li>
+                    <li>Participación en talleres y eventos especiales</li>
+                    <li>Comentarios y feedback en proyectos</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation between pages
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Category navigation in portfolios
+        function showCategory(categoryId) {
+            // Update sidebar
+            const categoryItems = document.querySelectorAll('.category-item');
+            categoryItems.forEach(item => item.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Update content
+            const categorySections = document.querySelectorAll('.category-section');
+            categorySections.forEach(section => section.classList.remove('active'));
+            document.getElementById(categoryId).classList.add('active');
+        }
+
+        // Search functionality
+        function buscarProyectos() {
+            const select = document.getElementById('searchInput');
+            const categoryId = select.value;
+            if (categoryId) {
+                showPage('portfolios');
+                // Activate the selected category in the sidebar
+                const categoryItems = document.querySelectorAll('.category-item');
+                categoryItems.forEach(item => item.classList.remove('active'));
+                const targetItem = document.querySelector(`.category-item[onclick="showCategory('${categoryId}')"]`);
+                if (targetItem) targetItem.classList.add('active');
+                // Show the selected category section
+                const categorySections = document.querySelectorAll('.category-section');
+                categorySections.forEach(section => section.classList.remove('active'));
+                document.getElementById(categoryId).classList.add('active');
+            }
+        }
+
+        // Allow search on Enter key
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        buscarProyectos();
+                    }
+                });
+            }
+        });
+    </script>
+    <!-- LIGHTBOX desplegable -->
+    <div id="lightbox" onclick="closeLightbox()" style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.85);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+        cursor: zoom-out;
+    ">
+        <!-- Para imágenes -->
+        <img id="lightbox-img" src="" 
+            onclick="event.stopPropagation()"
+            style="
+                display: none;
+                max-width: 90vw;
+                max-height: 90vh;
+                border-radius: 16px;
+                box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+                object-fit: contain;
+            ">
+
+        <!-- Para videos MP4 — sin <source> adentro -->
+        <video id="lightbox-video" controls
+            onclick="event.stopPropagation()"
+            style="
+                display: none;
+                max-width: 90vw;
+                max-height: 90vh;
+                border-radius: 16px;
+                box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+            ">
+        </video>
+
+        <!-- Para YouTube -->
+        <iframe id="lightbox-iframe" src=""
+            onclick="event.stopPropagation()"
+            style="
+                display: none;
+                width: 90vw;
+                max-width: 960px;
+                height: 540px;
+                border-radius: 16px;
+                border: none;
+                box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+            " allowfullscreen>
+        </iframe>
+    </div>
+
+    <script>
+        function openLightbox(src, tipo) {
+            const lb    = document.getElementById('lightbox');
+            const img   = document.getElementById('lightbox-img');
+            const video = document.getElementById('lightbox-video');
+            const iframe = document.getElementById('lightbox-iframe');
+
+            // Ocultar todos primero
+            img.style.display    = 'none';
+            video.style.display  = 'none';
+            iframe.style.display = 'none';
+
+            if (tipo === 'imagen') {
+                img.src = src;
+                img.style.display = 'block';
+
+            } else if (tipo === 'video') {
+                video.src = src;        // ← directo en el video, sin <source>
+                video.load();
+                video.play();
+                video.style.display = 'block';
+
+            } else if (tipo === 'youtube') {
+                const videoId = src.split('v=')[1]?.split('&')[0];
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                iframe.style.display = 'block';
+            }
+
+            lb.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            const video = document.getElementById('lightbox-video');
+            video.pause();
+            video.src = '';           // ← limpia el video al cerrar
+            document.getElementById('lightbox-iframe').src = '';
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+    <!-- COMING SOON / ASISTENTE PAGE -->
+    <div id="comingsoon" class="page">
+        <div class="comingsoon-page">
+            <div class="comingsoon-inner">
+                <span class="comingsoon-emoji">✨</span>
+                <div class="comingsoon-badge">Próximamente</div>
+                <h1>¡Estamos trabajando en esto!</h1>
+                <p>Nuestro asistente virtual está en construcción. Pronto podrás chatear con nosotros, resolver dudas sobre los portafolios y mucho más. ¡Gracias por tu paciencia!</p>
+                <div class="comingsoon-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <button class="comingsoon-btn" onclick="showPage('home')">Volver al inicio</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLOATING ASSISTANT BUTTON -->
+    <button class="floating-assistant" onclick="showPage('comingsoon')" title="Asistente virtual">💬</button>
+
+</body>
+</html>
